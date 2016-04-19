@@ -323,7 +323,7 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./files/PopulationChange_1960-2010.gif"></p>
+<p><img src="./files/PopulationChange_1960-2010_mod.gif"></p>
 
 </div>
 </div>
@@ -538,7 +538,7 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Adaboost">Adaboost<a class="anchor-link" href="#Adaboost">&#182;</a></h3>
+<h2 id="Adaboost">Adaboost<a class="anchor-link" href="#Adaboost">&#182;</a></h2>
 </div>
 </div>
 </div></section><section>
@@ -578,7 +578,7 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Multi-Class-Adaboost">Multi-Class Adaboost<a class="anchor-link" href="#Multi-Class-Adaboost">&#182;</a></h3><p>SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function)</p>
+<h2 id="Multi-Class-Adaboost">Multi-Class Adaboost<a class="anchor-link" href="#Multi-Class-Adaboost">&#182;</a></h2><p>SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function)</p>
 <p>Expands on Original Adaboost by including additional term with $\alpha$</p>
 
 </div>
@@ -619,7 +619,7 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Semi-Supervised-Multi-Class-Adaboost">Semi-Supervised Multi-Class Adaboost<a class="anchor-link" href="#Semi-Supervised-Multi-Class-Adaboost">&#182;</a></h3>
+<h2 id="Semi-Supervised-Multi-Class-Adaboost">Semi-Supervised Multi-Class Adaboost<a class="anchor-link" href="#Semi-Supervised-Multi-Class-Adaboost">&#182;</a></h2>
 </div>
 </div>
 </div></section><section>
@@ -637,6 +637,16 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>$\beta$ is a coefficient that determines weight of base classifier</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>$
 \beta^{(m)}=\frac{(K-1)^{2}}{K} \ast (log(\frac{(1-error^{(m)})}{error^{(m)}})+log(K-1))
 $</p>
@@ -649,7 +659,7 @@ $</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>$\beta$ is a coefficient that determines weight of base classifier</p>
+<p>Update weights for labeled and unlabeled seperately</p>
 
 </div>
 </div>
@@ -675,6 +685,15 @@ i = 1,2,...,n_{l}\}$</p>
 <p>if $i\ \epsilon \{i | c_{i} \not = P^{(m)}(x_{i})\
 i = n_{l} + 1,n_{l}+2,...,n_{l} + n_{u}\}$</p>
 
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2>
 </div>
 </div>
 </div></div></section></section><section><section>
@@ -722,7 +741,7 @@ from sklearn.neighbors import KNeighborsClassifier</p>
 
 </div>
 
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
