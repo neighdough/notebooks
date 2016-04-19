@@ -298,7 +298,7 @@ $(document).ready(function(){
 
 </div>
 </div>
-</div></section></section><section><section>
+</div></section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -314,7 +314,11 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="State/Condition">State/Condition<a class="anchor-link" href="#State/Condition">&#182;</a></h3>
+<h2 id="State/Condition">State/Condition<a class="anchor-link" href="#State/Condition">&#182;</a></h2><ul>
+<li>Need to be able to understand current status and trend of neighborhood</li>
+<li>Helps identify areas for future research</li>
+</ul>
+
 </div>
 </div>
 </div></section><section>
@@ -327,7 +331,7 @@ $(document).ready(function(){
 
 </div>
 </div>
-</div></section></section><section><section>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input_hidden">
 <div class="input">
@@ -387,7 +391,7 @@ $(document).ready(function(){
 </div>
 </div>
 
-</div>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input_hidden">
 <div class="input">
@@ -453,7 +457,7 @@ $(document).ready(function(){
 </div>
 </div>
 
-</div>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input_hidden">
 <div class="input">
@@ -556,6 +560,16 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Adjust weights by increasing or decreasing importance based on accuracy of classification</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>$\alpha^{(m)} = log \frac{1-err^{(m)}}{err^{(m)}}$</p>
 
 </div>
@@ -566,7 +580,7 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
+<h3 id="Limitations">Limitations<a class="anchor-link" href="#Limitations">&#182;</a></h3><ul>
 <li>Binary Classification</li>
 </ul>
 
@@ -578,8 +592,12 @@ $(document).ready(function(){
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Multi-Class-Adaboost">Multi-Class Adaboost<a class="anchor-link" href="#Multi-Class-Adaboost">&#182;</a></h2><p>SAMME (Stagewise Additive Modeling using a Multi-class Exponential loss function)</p>
-<p>Expands on Original Adaboost by including additional term with $\alpha$</p>
+<h2 id="Multi-Class-Adaboost---SAMME">Multi-Class Adaboost - SAMME<a class="anchor-link" href="#Multi-Class-Adaboost---SAMME">&#182;</a></h2><ul>
+<li><p>Stagewise Additive Modeling using a Multi-class Exponential loss function</p>
+</li>
+<li><p>Expands on Original Adaboost by including additional term with $\alpha$</p>
+</li>
+</ul>
 
 </div>
 </div>
@@ -687,7 +705,104 @@ i = n_{l} + 1,n_{l}+2,...,n_{l} + n_{u}\}$</p>
 
 </div>
 </div>
+</div></div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h3><h4 id="Inputs">Inputs<a class="anchor-link" href="#Inputs">&#182;</a></h4><ul>
+<li>D: training set with labled and unlabled examples</li>
+<li>$n_{l}$: number of labeled examples</li>
+<li>$n_{u}$: number of unlabeled examples</li>
+<li>M: maximum number of iterations</li>
+</ul>
+<h3 id="Initialize">Initialize<a class="anchor-link" href="#Initialize">&#182;</a></h3><ul>
+<li>Weights for labeled and unlabeled examples</li>
+<li>Assign pseudo-class to unlabled examples using KNN with K=1</li>
+<li>$H^{(0)}(x) = 0$</li>
+</ul>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h3><p>For m =1,2,...,M:</p>
+<ul>
+<li>Train multi-class base classifier (Decision Tree) $P^{(0)}(x)$ using labeled data and weight $w_{i}^{(m-1)}$</li>
+<li>Evaluate $P^{(m)}(x_{i}), i = 1,2,...,n_{l} + n_{u}$</li>
+<li>Compute error:</li>
+</ul>
+<p>$error^{(m)} = \frac{\sum_{j=1}^{nl+nu}w_{j}^{(m-1)}}{\sum_{i=1}^{nl+nu}w_{i}^{(m-1)}},\ j\ \epsilon \{j|c_{j} \not = P^{(m)}(x_{j}), j = 1,2,...,nl + nu\}$</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h3><ul>
+<li><p>If $error^{(m)} > (K-1)/(K)$, exit</p>
+</li>
+<li><p>Set:</p>
+</li>
+</ul>
+<p>$\beta^{(m)}=\frac{(K-1)^{2}}{K} \ast (log(\frac{(1-error^{(m)})}{error^{(m)}})+log(K-1))$</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h3><ul>
+<li>Update weights</li>
+</ul>
+<p>$ \alpha * w_{i}^{(m-1)} * exp(\frac{-\beta^{(m)}}{(K-1)^2})$</p>
+<p>if $i\ \epsilon \{i | c_{i} \not = P^{(m)}(x_{i})\
+i = 1,2,...,n_{l}\}$</p>
+<p>$ w_{i}^{(m-1)} * exp(\frac{-\beta^{(m)}}{(K-1)^2})$</p>
+<p>if $i\ \epsilon \{i | c_{i} \not = P^{(m)}(x_{i})\
+i = n_{l} + 1,n_{l}+2,...,n_{l} + n_{u}\}$</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h3><ul>
+<li>Normalize $w_{i}^{(m)}$</li>
+</ul>
+<p>$w_{i}^{(m)} * \frac{\sum_{i=1}^{n_{l}+n_{u}}\ w_{i}^{(m-1)}} {\sum_{i}^{n_{l}+n_{u}}\ w_{i=1}^{(m)}}$,
+$i = 1,2,...,n_{l} + n_{u}$</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Algorithm">Algorithm<a class="anchor-link" href="#Algorithm">&#182;</a></h3><ul>
+<li>Update </li>
+</ul>
+<p>$H^{(m)}(x) = H^{(m-1)}(x) + \beta^{(m)}(x) h^{(m)}(x)$</p>
+
+</div>
+</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -696,7 +811,7 @@ i = n_{l} + 1,n_{l}+2,...,n_{l} + n_{u}\}$</p>
 <h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation">&#182;</a></h2>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
@@ -709,45 +824,75 @@ from sklearn.neighbors import KNeighborsClassifier</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input_hidden">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input_hidden">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Initial-Results">Initial Results<a class="anchor-link" href="#Initial-Results">&#182;</a></h2>
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p><img src="./files/memphis_class.jpeg"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./files/chicago_class.jpeg"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./files/buffalo_class.jpeg"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./files/charlotte_class.jpeg"></p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./files/portland_class.jpeg"></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p>[1]R. E. Schapire, “Explaining AdaBoost,” in Empirical Inference, B. Schölkopf, Z. Luo, and V. Vovk, Eds. Springer Berlin Heidelberg, 2013, pp. 37–52.</p>
+<p>[2]J. Zhu, H. Zou, S. Rosset, and T. Hastie, “Multi-class adaboost,” Statistics and its Interface, vol. 2, no. 3, pp. 349–360, 2009.</p>
+<p>[3]E. Song, D. Huang, G. Ma, and C.-C. Hung, “Semi-supervised multi-class Adaboost by exploiting unlabeled data,” Expert Systems with Applications, vol. 38, no. 6, pp. 6720–6726, Jun. 2011.</p>
+<p>[4]E. C. Delmelle, “Five decades of neighborhood classifications and their transitions: A comparison of four US cities, 1970–2010,” Applied Geography, vol. 57, pp. 1–11, Feb. 2015.</p>
 
 </div>
 </div>
